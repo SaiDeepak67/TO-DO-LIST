@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    <style>
+        #bg {
+            background-color: gray;
+        }
+
+        #notebackground {
+            background-color: burlywood;
+            box-shadow: 10px 10px rgba(0, 0, 0, 0.5);
+            margin-left: 22em;
+            width: 50em;
+            border-radius: 20px;
+            min-height: fit-content;
+            max-height: max-content;
+        }
+
+        #txt {
+            font-size: 10mm;
+            background-color: chocolate;
+        }
+
+        #enterlist {
+            height: 40px;
+            width: 400px;
+            border-radius: 20px;
+            outline: none;
+            border: none;
+            background: transparent;
+        }
+
+        #badd {
+            height: 42px;
+            width: 70px;
+            border-radius: 20px;
+            border: 2px solid chocolate;
+            background-color: burlywood;
+            padding-left: -2%;
+        }
+
+        #tadd {
+            font-weight: 900;
+            color: white;
+            
+        }
+
+        #container {
+            margin-left: 10em;
+            background-color: white;
+            border-radius: 20px;
+            display: flex;
+            width: 500px;
+        }
+
+        #badd:hover {
+            background-color: gray;
+            cursor: pointer;
+        }
+
+        input {
+            flex: 1;
+        }
+
+        #task1 {
+            font-size: 30px;
+            padding: 12px 60px 12px 90px;
+            list-style-type: none;
+        }
+
+        .lt {
+            background-color: chocolate;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            margin-top: 5mm;
+        }
+
+        .task-button {
+            background: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 25px;
+            margin-right: 6.5cm;
+        }
+
+        .checkbox {
+            height: 20px;
+            width: 25px;
+            clip-path: circle();
+            outline: transparent;
+            border: transparent;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .trash-button {
+            background: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 20px;
+            
+        }
+
+    </style>
+</head>
+<body id="bg">
+<div id="notebackground">
+    <p id="txt">To-Do List 📝</p>
+
+    <div id="container">
+        <input type="text" placeholder="Enter here" id="enterlist">
+        <button id="badd" onclick="addTask()"><i id="tadd">+ Add</i></button>
+    </div>
+
+    <ul id="task1">
+       
+    </ul>
+</div>
+<script>
+    const taskList = document.getElementById('task1');
+
+    function trashButton(li) {
+        li.remove();
+    }
+
+    function addTask() {
+        const textbox = document.getElementById('enterlist');
+        const taskText = textbox.value.trim();
+
+        if (taskText === '') {
+            alert("You should enter something in the textbox first");
+            return;
+        }
+
+        const li = document.createElement("li");
+        li.className = "task";
+        li.innerHTML = `
+            <div class="lt">
+                <input type="checkbox" class="checkbox">
+                <div class="task-text">${taskText}</div>
+                <button class="task-button" onclick="trashButton(this.parentElement.parentElement)">🗑️</button>
+            </div>
+        `;
+
+        taskList.appendChild(li);
+        textbox.value = '';
+    }
+</script>
+</body>
+</html>
